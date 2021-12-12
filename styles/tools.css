@@ -1,0 +1,57 @@
+/* ------------------------TOOLS------------------------ */
+#tool-wrapper{
+  background-color: #000;
+  margin: auto;
+  border-radius: 20px;
+}
+
+#tools-icon{
+  font-size: 40px;
+  margin-top: 9px;
+  margin-left: 6px;
+}
+
+#tool-bar{
+  width: calc(100% - 50px);
+  padding: 10px 0px;
+  background-color: #333;
+  margin: 20px 10% 30px 50px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  border-radius: 5px;
+}
+
+.tool-button-background{
+  display: block;
+  text-align: left;
+  width: 168px;
+  background-color: black;
+  border-radius: 20px;
+}
+
+.settings{
+  transition-duration: 0.3s;
+  color: white;
+  cursor: pointer;
+}
+.settings:hover{
+  color: #aaa;
+}
+
+.tool-button{
+  transition-duration: 0.3s;
+  background-color: #333;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+  padding: 4px 7px 4px 7px;
+  cursor: pointer;
+  border: 3px solid #777;
+  border-radius: 4px;
+  width: 130px;
+}
+.tool-button:hover {
+  background-color: #777;
+  color: black;
+}

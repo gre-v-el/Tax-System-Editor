@@ -1,0 +1,107 @@
+/* ----------------------THRESHOLDS--------------------- */
+#bottom-flex{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+
+
+#thresholds-wrapper{
+  background-color: black;
+  width: 550px;
+  margin: 50px 50px;
+  border-radius: 35px;
+  box-shadow: 10px 10px 50px black;
+}
+
+#thresholds-holder{
+  background-color: #333;
+  border: 1px solid #777;
+  border-radius: 5px;
+  width: calc(100% - 50px);
+  min-height: 200px;
+  margin: 0;
+  float: left;
+}
+
+.threshold-unit{
+  background-color: #222;
+  border-radius: 5px;
+  margin: 10px;
+  height: 70px;
+}
+
+.threshold-unit>span{
+  color: rgb(255, 255, 255);
+  font-weight: 700;
+  position: relative;
+  left: 0px;
+  top: -140px;
+  z-index: 1;
+  margin: 0px;
+  pointer-events: none;
+}
+
+.percentage-slider{
+  position: relative;
+  left: 0px;
+  top: -70px;
+  -webkit-appearance: none;
+  margin: 0px;
+  border-radius: 3px;
+  width: 100%;
+  height: 70px;
+  outline: none;
+  cursor: pointer;
+  opacity: 0.0;
+  z-index: 1;
+}
+.percentage-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 0;
+}
+.percentage-slider::-moz-range-thumb {
+  width: 0;
+}
+
+.percentage-bar{
+  position: relative;
+  left: 0px;
+  top: 0px;
+  border-radius: 5px;
+
+  margin: 0px;
+  height: 70px;
+  background-color: #444;
+}
+
+#thresholds-toolbox{
+  width: 38px;
+  height: 50px;
+  margin: 15px 0px 0px 3px;
+  float: left;
+}
+#thresholds-toolbox>button{
+  background-color: rgba(255, 255, 255, 0);
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 15px;
+}
+
+
+
+
+#outcomes{
+  width: 400px;
+  height: 200px;
+  background-color: #222;
+  margin: 50px;
+  border-radius: 10px;
+  padding: 15px 40px;
+  text-align: left;
+  box-shadow: 10px 10px 80px black;
+  border: 1px solid #777;
+}

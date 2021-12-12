@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Tax system editor</title>
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <link rel="shortcut icon" href="media/icon.ico" type="image/xicon">
+
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="styles/tools.css">
+  <link rel="stylesheet" href="styles/graph.css">
+  <link rel="stylesheet" href="styles/thresholds.css">
+  <link rel="stylesheet" href="styles/tooltips.css">
+  <link rel="stylesheet" href="styles/modals.css">
+</head>
+<!-- ------------------------------------------------------------------------------------------- -->
+
+<body onload="setSize(); resetThresholds()">
+  <div id="container">
+
+    <div id="backplate">
+      <h1>TAX SYSTEM EDITOR</h1>
+    </div>
+
+    <div id="graph-space">
+      <!-- --------------------TOOLS-------------------- -->
+      <div id="tool-wrapper">
+        <span id="tools-icon" class="material-icons" style="float: left;">handyman</span>
+        <div id="tool-bar">
+
+          <div class="tool-button-background">
+            <button class="tool-button tooltip" id="button-randomize">
+              <span class="material-icons" style="float: left;">bar_chart</span>
+              <div style="float: right; margin: 5px 5px 0px 0px;">randomize</div>
+              <span class="tooltiptext">Adds random noise to the graph to make data more natural.</span>
+            </button>
+            <div class="material-icons settings" id="settings-randomize">settings</div>
+          </div>
+
+          <div class="tool-button-background">
+            <button class="tool-button tooltip" id="button-linear">
+              <span class="material-icons" style="float: left;">trending_down</span>
+              <div style="float: right; margin: 5px 5px 0px 0px;">linear</div>
+              <span class="tooltiptext">Sets bars to fill up a linear graph. (erases current data)</span>
+            </button>
+            <span class="material-icons settings" id="settings-linear">settings</span>
+          </div>
+
+          <div class="tool-button-background">
+            <button class="tool-button tooltip" id="button-exponential">
+              <span class="material-icons" style="float: left;">south_east</span>
+              <div style="float: right; margin: 5px 5px 0px 0px;">exponential</div>
+              <span class="tooltiptext">Sets bars to fill up an exponential graph. (erases current data)</span>
+            </button>
+            <span class="material-icons settings" id="settings-exponential">settings</span>
+          </div>
+
+          <div class="tool-button-background">
+            <button class="tool-button tooltip" id="button-normalize">
+              <span class="material-icons" style="float: left;">unfold_more</span>
+              <div style="float: right; margin: 5px 5px 0px 0px;">normalize</div>
+              <span class="tooltiptext">Scales the entire graph to represent set amount of people.</span>
+            </button>
+            <span class="material-icons settings" id="settings-normalize">settings</span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- --------------------CANVASES-------------------- -->
+      <div id="click-space">
+        <div class="axis-desc" style="margin-top: 0px;">1000s<br>people</div>
+
+        <canvas id="vertical-scale" width="50" height="400"></canvas>
+
+        <canvas id="salary-graph" width="600" height="400">
+          Your browser does not work well with this site, try using different one.
+        </canvas>
+
+        <div style="clear: both;"></div>
+
+        <canvas id="horizontal-scale" width="600" height="50"></canvas>
+
+        <div class="axis-desc" style="float: right;">yearly<br>salary</div>
+        <div style="clear: both;"></div>
+      </div>
+    </div>
+
+    <!-- --------------------THRESHOLDS-------------------- -->
+    <div id="bottom-flex">
+      <div id="thresholds-wrapper">
+        <div id="thresholds-holder">
+<!--           
+          <div id="threshold-unit-0" class="threshold-unit">
+            <div id="percentage-bar-0" class="percentage-bar" style="width: 17%;"></div>
+            <input type="range" min="0" max="100" value="17" class="percentage-slider" oninput="sliderinput(this.value, 0)">
+            <span id="threshold-text-0">
+              0 PLN - 
+              <input style="z-index: 2;" type="number" value="85528" min="0" step="1">PLN
+              <br>
+              <span id="threshold-percentage-0">17</span>%
+            </span>
+          </div>
+          -->
+        </div>
+
+        <div id="thresholds-toolbox">
+          <button id="threshold-add">
+            <span class="material-icons">add</span>
+          </button>
+          <button id="threshold-remove">
+            <span class="material-icons">remove</span>
+          </button>
+
+        </div>
+
+        <div style="clear: both;"></div>
+
+        
+      </div>
+
+      <div id="outcomes">
+        <h2 style="margin: 0 0 20px 30px;">Data</h2>
+
+        <table>
+          <tr>
+            <td> State income: </td>
+            <td> <span id="state-income"> - USD</span> </td>
+          </tr>
+          <tr>
+            <td> Average wage: </td>
+            <td> <span id="average-wage"> - USD</span> </td>
+          </tr>
+          <tr>
+            <td> Median wage: </td>
+            <td> <span id="median-wage"> - USD</span> </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+
+
+
+  <!-- --------------------MODALS-------------------- -->
+  <!-- randomize -->
+  <div id="modal-randomize" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close">&times;</span>
+        <h1>Randomize tool settings</h1>
+      </div>
+      <div class="modal-body">
+        random amount:
+        <input type="number" value="10" min="1" max="99" step="1" id="input-0-randomize">
+      </div>
+    </div>
+  </div>
+
+  <!-- linear -->
+  <div id="modal-linear" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close">&times;</span>
+        <h1>Linear tool settings</h1>
+      </div>
+      <div class="modal-body">
+        left-most value:
+        <input type="number" value="110" min="1" step="1" id="input-0-linear">
+        <br>
+        rigth-most value:
+        <input type="number" value="10" min="1" step="1" id="input-1-linear">
+      </div>
+    </div>
+  </div>
+
+  <!-- exponential -->
+  <div id="modal-exponential" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close">&times;</span>
+        <h1>Exponential tool settings</h1>
+      </div>
+      <div class="modal-body">
+        left-most value:
+        <input type="number" value="110" min="1" step="1" id="input-0-exponential">
+        <br>
+        rigth-most value:
+        <input type="number" value="1" min="1" step="1" id="input-1-exponential">
+      </div>
+    </div>
+  </div>
+
+  <!-- normalize -->
+  <div id="modal-normalize" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close">&times;</span>
+        <h1>Normalize tool settings</h1>
+      </div>
+      <div class="modal-body">
+        amount of people (in thousands):
+        <input style="width: 100px" type="number" value="16555" min="1" step="1" id="input-0-normalize">
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
